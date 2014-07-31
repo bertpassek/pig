@@ -26,7 +26,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapred.Counters;
-import org.apache.hadoop.mapred.DowngradeHelper;
+import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.TIPStatus;
 import org.apache.hadoop.mapred.TaskReport;
@@ -42,7 +42,6 @@ import org.apache.hadoop.mapreduce.TaskType;
 import org.apache.hadoop.mapreduce.task.JobContextImpl;
 import org.apache.hadoop.mapreduce.task.TaskAttemptContextImpl;
 import org.apache.pig.backend.hadoop.executionengine.physicalLayer.relationalOperators.POStore;
-import org.apache.pig.backend.hadoop23.PigJobControl;
 
 public class HadoopShims {
 
@@ -109,7 +108,7 @@ public class HadoopShims {
     }
 
     public static JobControl newJobControl(String groupName, int timeToSleep) {
-      return new PigJobControl(groupName, timeToSleep);
+      return new JobControl(groupName);
     }
 
     public static long getDefaultBlockSize(FileSystem fs, Path path) {
@@ -213,12 +212,9 @@ public class HadoopShims {
     }
 
     public static TaskReport[] getTaskReports(Job job, TaskType type) throws IOException {
-        org.apache.hadoop.mapreduce.Job mrJob = job.getJob();
-        try {
-            org.apache.hadoop.mapreduce.TaskReport[] reports = mrJob.getTaskReports(type);
-            return DowngradeHelper.downgradeTaskReports(reports);
-        } catch (InterruptedException ir) {
-            throw new IOException(ir);
-        }
+        JobClient jobClient = job.getJobClient();
+        return (type == TaskType.MAP)
+                ? jobClient.getMapTaskReports(job.getAssignedJobID())
+                        : jobClient.getReduceTaskReports(job.getAssignedJobID());
     }
 }

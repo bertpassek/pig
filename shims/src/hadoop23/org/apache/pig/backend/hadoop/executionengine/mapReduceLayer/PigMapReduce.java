@@ -153,23 +153,6 @@ public class PigMapReduce extends PigGenericMapReduce {
                 private int mark = -1;
 
                 @Override
-                public void mark() throws IOException {
-                    mark=pos-1;
-                    if (mark<-1)
-                        mark=-1;
-                }
-
-                @Override
-                public void reset() throws IOException {
-                    pos=mark;
-                }
-
-                @Override
-                public void clearMark() throws IOException {
-                    mark=-1;
-                }
-
-                @Override
                 public boolean hasNext() {
                     return pos<currentValues.size()-1;
                 }
@@ -184,13 +167,6 @@ public class PigMapReduce extends PigGenericMapReduce {
                 public void remove() {
                     throw new UnsupportedOperationException("remove not implemented");
                 }
-
-                @Override
-                public void resetBackupStore() throws IOException {
-                    pos=-1;
-                    mark=-1;
-                }
-                
             }
             
             protected class IllustratorValueIterable implements Iterable<NullableTuple> {

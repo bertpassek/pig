@@ -22,17 +22,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.mapreduce.filecache.DistributedCache;
-import org.apache.hadoop.mapreduce.v2.MiniMRYarnCluster;
-import org.apache.hadoop.mapreduce.v2.TestMRJobs;
-import org.apache.hadoop.yarn.server.MiniYARNCluster;
-import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hdfs.MiniDFSCluster;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.pig.backend.hadoop.datastorage.ConfigurationUtil;
 
 /**
  * This class builds a single instance of itself with the Singleton

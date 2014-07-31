@@ -32,7 +32,7 @@
   <property name="repo.maven.org" value="${mvnrepo}" override="true"/>
   <property name="repo.jboss.org" value="http://repository.jboss.com/nexus/content/groups/public/" override="false"/>
   <property name="repo.apache.snapshots" value="http://repository.apache.org/content/groups/snapshots-group/" override="false"/>
-  <property name="repo.dir" value="${user.home}/.m2/repository" override="false"/>
+  <property name="repo.dir" value="/home/s.luhn/projects/maven/repository" override="false"/>
   <property name="maven2.pattern" value="[organisation]/[module]/[revision]/[module]-[revision](-[classifier])"/>
   <property name="maven2.pattern.ext" value="${maven2.pattern}.[ext]"/>
   <property name="snapshot.pattern" value="[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"/>
@@ -42,6 +42,8 @@
   <include url="${ivy.default.conf.dir}/ivyconf-local.xml"/>
   <settings defaultResolver="${resolvers}"/>
   <resolvers>
+    <ibiblio name="unister" root="http://nexus.unister.lan/nexus/content/groups/cpc-releases" pattern="${maven2.pattern.ext}" m2compatible="true"/>
+    <ibiblio name="cloudera" root="http://nexus.unister.lan/nexus/content/repositories/cloudera" pattern="${maven2.pattern.ext}" m2compatible="true"/>
     <ibiblio name="maven2" root="${repo.maven.org}" pattern="${maven2.pattern.ext}" m2compatible="true"/>
     <ibiblio name="jboss-maven2" root="${repo.jboss.org}" pattern="${maven2.pattern.ext}" m2compatible="true"/>
     <ibiblio name="apache-snapshots" root="${repo.apache.snapshots}" pattern="${snapshot.pattern}"
@@ -55,6 +57,8 @@
       <resolver ref="fs"/>
     </chain>
     <chain name="external" dual="true">
+      <resolver ref="unister"/>
+      <resolver ref="cloudera"/>
       <resolver ref="maven2"/>
       <resolver ref="jboss-maven2"/>
       <resolver ref="apache-snapshots"/>
