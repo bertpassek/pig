@@ -60,7 +60,7 @@
     <property name="javac.debug" value="on" />
     <property name="javac.optimize" value="on" />
     <property name="javac.deprecation" value="off" />
-    <property name="javac.version" value="1.5" />
+    <property name="javac.version" value="1.6" />
     <property name="javac.args" value="" />
     <condition property="javac.args.warnings" value="-Xmaxwarns 1000000 -Xlint -Xlint:-deprecation" else="-Xmaxwarns 1000000">
         <isset property="all.warnings" />
@@ -370,9 +370,9 @@
             <include name="guava-${guava.version}.jar"/>
             <include name="automaton-${automaton.version}.jar"/>
             <include name="jansi-${jansi.version}.jar"/>
-            <include name="avro-${avro.version}.jar"/>     
-            <include name="avro-mapred-${avro.version}.jar"/>     
-            <include name="trevni-core-${avro.version}.jar"/>     
+            <include name="avro-${avro.version}.jar"/>
+            <include name="avro-mapred-${avro.version}.jar"/>
+            <include name="trevni-core-${avro.version}.jar"/>
             <include name="trevni-avro-${avro.version}.jar"/>
             <include name="snappy-java-${snappy.version}.jar"/>
             <include name="asm*.jar"/>
@@ -392,8 +392,8 @@
             <include name="slf4j*.jar"/>
             <include name="jsp-api*.jar"/>
             <include name="avro-${avro.version}.jar"/>
-            <include name="avro-mapred-${avro.version}.jar"/>    
-            <include name="trevni-core-${avro.version}.jar"/>    
+            <include name="avro-mapred-${avro.version}.jar"/>
+            <include name="trevni-core-${avro.version}.jar"/>
             <include name="trevni-avro-${avro.version}.jar"/>
             <include name="snappy-java-${snappy.version}.jar"/>
             <include name="asm*.jar"/>
@@ -981,11 +981,11 @@
     <target name="package-h12" depends="jar-all-h12, docs, api-report, piggybank" description="Create a Pig tar release">
 		<package-base/>
     </target>
-	
+
     <target name="package" depends="jar-all, docs, api-report, piggybank" description="Create a Pig tar release">
 		<package-base/>
     </target>
-	
+
     <macrodef name="package-base">
       <sequential>
         <mkdir dir="${tar.dist.dir}" />
