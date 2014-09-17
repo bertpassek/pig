@@ -17,6 +17,7 @@ pig-withouthadoop.jar
 *.swp
 *.classpath
 *.project
+*.settings
 *.crc
 .ant-targets-build.xml
 contrib/piggybank/java/piggybank.jar
